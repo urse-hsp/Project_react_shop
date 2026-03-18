@@ -78,16 +78,14 @@ request.interceptors.response.use(async (response) => {
   }
   // 可以对响应进行处理
   const data = await response.clone().json()
-  console.log('响应拦截器执行', data, response)
+  // console.log('响应拦截器执行', data, response)
   if (response.status === 200) {
     return data
   } else if (response.status === 201) {
-    // 创建成功
-    // message.success('创建成功')
-    return true
+    return data
   } else if (response.status === 422) {
     // 错误处理
-    message.error(data.error)
+    message.error(data.message)
     return false
   } else if (response.status === 403) {
     // 未登录

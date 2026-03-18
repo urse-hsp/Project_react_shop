@@ -7,7 +7,28 @@ import { StateType } from './model'
 import styles from './style.less'
 import { LoginParamsType } from './service'
 import LoginFrom from './components/Login'
+import { login } from './service'
+import { message } from 'antd'
+import { history } from 'umi'
 
+function setAuthority(data: any | any[]) {
+  if (data.id) {
+    localStorage.setItem('adminData', JSON.stringify(data))
+  } else {
+    window.sessionStorage.setItem('adminData', JSON.stringify(data))
+  }
+  // hard code
+  // reload Authorized component
+  try {
+    if ((window as any).reloadAuthorized) {
+      ;(window as any).reloadAuthorized()
+    }
+  } catch (error) {
+    // do not need do anything
+  }
+
+  return data
+}
 // const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginFrom
 const { Tab, UserName, Password, Submit } = LoginFrom
 
@@ -48,16 +69,18 @@ const Login: React.FC<LoginProps> = (props) => {
   const [autoLogin, setAutoLogin] = useState(false)
   const [type, setType] = useState<string>('account')
 
-  const handleSubmit = (values: LoginParamsType) => {
-    const { dispatch } = props
-    dispatch({
-      type: 'userAndlogin/login',
-      payload: {
-        ...values,
-        type,
-        autoLogin,
-      },
-    })
+  const handleSubmit = async (values: LoginParamsType) => {
+    const param: any = {
+      username: values.userName,
+      password: values.password,
+    }
+    const res = await login(param)
+
+    if (res) {
+      setAuthority(res)
+      message.success('登录成功')
+      history.replace('http://www.baidu.com')
+    }
   }
   return (
     <div className={styles.main}>

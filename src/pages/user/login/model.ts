@@ -8,7 +8,7 @@ import { getFakeCaptcha, login } from './service'
 //   return parse(window.location.href.split('?')[1])
 // }
 
-export function setAuthority(data: any | any[]) {
+function setAuthority(data: any | any[]) {
   if (data.id) {
     localStorage.setItem('adminData', JSON.stringify(data))
   } else {
@@ -109,7 +109,7 @@ const Model: ModelType = {
       setAuthority(payload)
       return {
         ...state,
-        status: payload.meta.status,
+        status: payload.status,
       }
     },
   },
