@@ -22,8 +22,9 @@ const RoleList: React.FC<{}> = () => {
   const aJurisdictionList: any[] = []
 
   // 循环递归给每个数据添加key值   参数二false时 是判断分配权限的
-  const recursion = (datas: any, jurisdiction: boolean) => {
-    datas.map((item: any, index: number) => {
+  const recursion = (datas: any = [], jurisdiction: boolean) => {
+    if (datas && datas.length === 0) return
+    datas?.map((item: any, index: number) => {
       if (jurisdiction) {
         aJurisdictionList.push(item.id)
         setJurisdictionList(aJurisdictionList)
@@ -224,7 +225,7 @@ const RoleList: React.FC<{}> = () => {
           expandable={{
             childrenColumnName: ' ',
             expandedRowRender: (record) => <div style={{ margin: 0 }}>{expandedRowRender(record, record)}</div>,
-            rowExpandable: (record) => record.children.length > 0,
+            rowExpandable: (record) => record?.children?.length > 0,
           }}
           dataSource={RoleData}
           pagination={{

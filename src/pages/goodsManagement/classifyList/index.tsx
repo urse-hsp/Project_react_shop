@@ -145,7 +145,7 @@ class ClassifyList extends React.Component {
       attr_vals: property.attr_vals,
     }
     const { meta } = await setAttributes(params)
-    if (meta.status !== 200) return message.error(meta.msg)
+    if (meta?.status !== 200 || meta?.status !== 204) return message.error(meta?.msg)
     message.success(meta.msg)
     return this.getData()
   }

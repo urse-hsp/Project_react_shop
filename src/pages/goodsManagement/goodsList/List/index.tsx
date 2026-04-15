@@ -74,7 +74,7 @@ const GoodsList: React.FC<TableListItem> = () => {
       dataIndex: 'add_time',
       key: 'add_time',
       width: 170,
-      render: (_: any) => newDate(_),
+      render: (_: any) => newDate(_ * 1000),
     },
     {
       title: '操作',

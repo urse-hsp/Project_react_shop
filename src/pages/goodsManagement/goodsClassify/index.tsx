@@ -87,7 +87,7 @@ const GoodsClassify: React.FC<TableListItem> = () => {
 
   // 循环递归给每个数据添加key值
   const recursion = (datas: any) => {
-    datas.map((item: any, index: number) => {
+    datas?.map((item: any, index: number) => {
       const Obj = item
       Obj.key = item.cat_id
       Obj.index = index + 1

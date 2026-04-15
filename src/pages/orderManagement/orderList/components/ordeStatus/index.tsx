@@ -72,7 +72,7 @@ const OrdeStatus: React.FC<CreateFormProps> = (props) => {
   const onOk = () => {
     form.validateFields().then((values) => {
       const params = {
-        order_price: values.order_price,
+        order_price: Number(values.order_price),
         id: OrdeData.order_id,
         is_send: isSendValue === '是' ? '1' : '0',
         order_pay: orderPayValue,

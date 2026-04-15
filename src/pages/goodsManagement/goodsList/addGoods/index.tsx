@@ -137,8 +137,6 @@ const AddGoods: React.FC<AddGoodsProps> = (props) => {
   }
 
   const getInfo = async () => {
-    console.log(query.id, 'query.id')
-
     if (!query.id) return
     const res = await getGoodsInfo(Number(query.id))
     if (!res) return
@@ -150,13 +148,13 @@ const AddGoods: React.FC<AddGoodsProps> = (props) => {
       goods_name: Data.goods_name,
       goods_price: Data.goods_price,
       goods_weight: Data.goods_weight,
-      goods_number: Data.goods_number,
+      goods_number: Number(Data.goods_number),
       goods_cat: Data.goods_cat.split(','),
       // attrs: Data.attrs,
     })
 
     // 处理图片数据
-    Data.pics.map((item: any) => {
+    Data?.pics?.map((item: any) => {
       const Obj = item
       Obj.uid = item.pics_id
       Obj.url = item.pics_big_url
@@ -182,6 +180,8 @@ const AddGoods: React.FC<AddGoodsProps> = (props) => {
 
   // 初始化
   useEffect(() => {
+    console.log(111)
+
     getInfo()
     getDataList()
   }, [])
@@ -296,8 +296,8 @@ const AddGoods: React.FC<AddGoodsProps> = (props) => {
         goods_name: values.goods_name,
         goods_cat: values.goods_cat.join(),
         goods_price: values.goods_price,
-        goods_number: values.goods_number,
-        goods_weight: values.goods_weight,
+        goods_number: Number(values.goods_number),
+        goods_weight: Number(values.goods_weight),
         goods_introduce: editorContent,
         pics: goodsImg.map((item: any) => {
           item.url = item.pic

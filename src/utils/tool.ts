@@ -1,6 +1,7 @@
 /* 一些常量值的模块 */
 
-export const BASE_URL = 'http://127.0.0.1:7001/api/private/v1/'
+// export const BASE_URL = 'http://127.0.0.1:7001/api/private/v1/' // egg
+export const BASE_URL = 'http://127.0.0.1:8080/api/private/v1/' // go
 // export const BASE_URL = 'http://egg.shaop-cloud.cn/api/private/v1/'
 
 // 获取Token
